@@ -1,3 +1,4 @@
 *.cfg
 *.csv
 *.xls
+.vscode
