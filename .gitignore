@@ -1,4 +1,4 @@
-*.cfg
+dwh.cfg
 *.csv
 *.xls
 .vscode
