@@ -14,9 +14,9 @@ Developed an ETL pipeline that extracts their AWS S3, stages them in Redshift, a
 ## Database Design
 The database is designed using the Star Schema. The data after loading into the staging table is injested from the staging table to the target Fact and Dimension tables
 
-    Fact Table  |   Dimension Table
-----------------| -------------------
-songplay_table  |   songsong_table
-                |   artist_table
-                |   user_table
-                |   time_table
+| Left-aligned | Center-aligned | 
+|   :---:      |     :---:      |
+| songplay_table   | song_table     |
+|              | artist_table       |
+|              | user_table       |
+|              | time_table       | 
