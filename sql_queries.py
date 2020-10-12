@@ -57,7 +57,7 @@ staging_songs_table_create = ("""
 
 songplay_table_create = ("""
     CREATE TABLE songplay_table(
-        songplay_id     INT IDENTITY(0,1), 
+        songplay_id     INT IDENTITY(0,1) PRIMARY KEY, 
         start_time      VARCHAR, 
         user_id         INTEGER, 
         level           VARCHAR, 
@@ -71,7 +71,7 @@ songplay_table_create = ("""
 
 user_table_create = ("""
     CREATE TABLE user_table(
-        user_id     INTEGER, 
+        user_id     INTEGER PRIMARY KEY, 
         first_name  VARCHAR, 
         last_name   VARCHAR, 
         gender      VARCHAR, 
@@ -81,7 +81,7 @@ user_table_create = ("""
 
 song_table_create = ("""
     CREATE TABLE song_table(
-        song_id     VARCHAR, 
+        song_id     VARCHAR PRIMARY KEY, 
         title       VARCHAR, 
         artist_id   VARCHAR, 
         year        INT,
@@ -91,7 +91,7 @@ song_table_create = ("""
 
 artist_table_create = ("""
     CREATE TABLE artist_table(
-        artist_id   VARCHAR,
+        artist_id   VARCHAR PRIMARY KEY,
         name        VARCHAR, 
         location    VARCHAR, 
         latitude    FLOAT, 
@@ -101,7 +101,7 @@ artist_table_create = ("""
 
 time_table_create = ("""
     CREATE TABLE time_table(
-        start_time      TIMESTAMP,
+        start_time      TIMESTAMP PRIMARY KEY,
         time_hour       INTEGER, 
         time_day        INTEGER, 
         time_week       INTEGER, 
@@ -139,19 +139,19 @@ songplay_table_insert = ("""
 """)
 
 user_table_insert = ("""
-    INSERT INTO user_table SELECT userId, firstName, lastName, gender, level FROM staging_events_log
+    INSERT INTO user_table SELECT DISTICT userId, firstName, lastName, gender, level FROM staging_events_log
 """)
 
 song_table_insert = ("""
-    INSERT INTO song_table SELECT song_id, title, artist_id, year, duration FROM staging_songs
+    INSERT INTO song_table SELECT DISTICT song_id, title, artist_id, year, duration FROM staging_songs
 """)
 
 artist_table_insert = ("""
-    INSERT INTO artist_table SELECT artist_id, artist_name, artist_location, artist_latitude, artist_longitude FROM staging_songs
+    INSERT INTO artist_table SELECT DISTICT artist_id, artist_name, artist_location, artist_latitude, artist_longitude FROM staging_songs
 """)
 
 time_table_insert = ("""
-    INSERT INTO time_table SELECT ts, EXTRACT(HOUR FROM ts), EXTRACT(DAY FROM ts), EXTRACT(WEEK FROM ts), EXTRACT(MONTH FROM ts), EXTRACT(YEAR FROM ts), EXTRACT(dayofweek FROM ts) FROM staging_events_log
+    INSERT INTO time_table SELECT DISTICT ts, EXTRACT(HOUR FROM ts), EXTRACT(DAY FROM ts), EXTRACT(WEEK FROM ts), EXTRACT(MONTH FROM ts), EXTRACT(YEAR FROM ts), EXTRACT(dayofweek FROM ts) FROM staging_events_log
 """)
 
 # QUERY LISTS
